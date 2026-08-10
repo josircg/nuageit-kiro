@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "documentacao-aprovada": {
+      "url": "https://mcp.exemplo.invalid/readonly",
+      "headers": {
+        "authorization": "Bearer ${MCP_READONLY_TOKEN}"
+      },
+      "disabled": true,
+      "autoApprove": [],
+      "disabledTools": [
+        "create_document",
+        "update_document",
+        "delete_document"
+      ]
+    }
+  }
+}
