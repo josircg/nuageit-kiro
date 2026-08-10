@@ -1,0 +1,13 @@
+{
+  "name": "treinamento-kiro-fila-clara",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Projeto didático sem dependências para o treinamento de Kiro",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test"
+  }
+}
