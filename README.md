@@ -1,27 +1,31 @@
 # Treinamento Kiro — práticas por módulo
 
-Este repositório acompanha o treinamento de Kiro em quatro módulos. A branch `main` é apenas o ponto de entrada: cada prática está em uma branch independente, com seu próprio `README.md` e somente os arquivos necessários para o exercício.
+Este repositório acompanha um treinamento de 8 horas, dividido em quatro módulos de 2 horas. Cada encontro possui 90 minutos de conteúdo e prática guiada e 30 minutos de dúvidas.
 
-Depois de clonar o repositório, troque para a branch do módulo que deseja praticar. Não execute a atividade diretamente na `main`.
+A branch `main` é somente o ponto de entrada. Cada prática está em uma branch independente, com seu próprio `README.md` e apenas os arquivos necessários para executar o exercício localmente.
 
-## Atividades disponíveis
+## Como o conteúdo foi dimensionado
 
-| Branch | Dever de casa | Resultado esperado |
-|---|---|---|
-| `modulo-01` | diagnóstico e correção controlada | corrigir um defeito e comparar prompts |
-| `modulo-02` | Spec-driven development | concluir uma Feature Spec e uma Bugfix Spec |
-| `modulo-03` | contexto e automação | criar uma automação com escopo e falha segura |
-| `modulo-04` | operação segura | concluir e documentar o capstone técnico |
+O treinamento apresenta as principais superfícies do Kiro, mas pratica somente o núcleo que cabe no tempo disponível e considera a latência dos modelos:
 
-Os exercícios são independentes. Sempre comece na branch indicada, não na entrega do módulo anterior.
+- até dois turnos principais do Kiro por prática;
+- dois ou três arquivos de contexto;
+- uma mudança pequena;
+- teste local rápido;
+- caminho de recuperação se o modelo demorar mais de três minutos.
 
-## Pré-requisitos
+Recursos extensos, como Spec completa, MCP conectado, múltiplos agentes, headless e Kiro Web, são demonstrados ou apresentados durante o treinamento. Eles não são dependências das práticas.
 
-- Kiro IDE ou Kiro CLI autenticado;
-- Git;
-- Node.js 20 ou superior;
-- permissão para criar uma branch própria;
-- nenhum dado, segredo ou credencial real no ambiente do exercício.
+## Branches
+
+| Branch | Prática | Duração estimada |
+|---|---|---:|
+| `modulo-01` | diagnosticar e corrigir um defeito com escopo controlado | 20–25 min |
+| `modulo-02` | refinar um requisito e implementar uma função de SLA | 25 min |
+| `modulo-03` | completar um steering e revisar com uma skill | 20–25 min |
+| `modulo-04` | planejar e implementar uma função com agente restrito | 25 min |
+
+As práticas são independentes. Não é necessário concluir uma branch para iniciar a seguinte.
 
 ## Como começar
 
@@ -34,18 +38,22 @@ npm test
 kiro .
 ```
 
-Ao trocar de branch, leia novamente o `README.md` raiz. Ele contém objetivo, passos, prompts sugeridos, critérios de aceite e formato de entrega.
+Ao trocar de branch, leia novamente o `README.md` raiz. Ele contém objetivo, cronômetro, arquivos de contexto, dois prompts sugeridos, validação e caminho de recuperação.
 
-## Regras de entrega
+## Regras simples
 
-1. trabalhe em `participante/<nome>/modulo-XX`;
-2. revise comandos e diffs antes de aceitar ações do Kiro;
-3. não enfraqueça testes para obter verde;
-4. não inclua `.env`, credenciais, tokens ou dados de cliente;
-5. registre a evidência em `evidencias/modulo-XX.md`;
-6. execute `npm test` e `git diff --check`;
-7. abra um pull request da sua branch, sem alterar as branches `modulo-XX`.
+1. trabalhe em uma branch própria;
+2. use somente dados fictícios;
+3. revise comandos antes de autorizá-los;
+4. não altere testes apenas para obter verde;
+5. execute o teste indicado e revise o diff;
+6. pare quando o objetivo da prática estiver atendido.
 
-## Projeto-base
+Não há relatório, formulário ou pull request obrigatório. O foco é executar o fluxo e compreender as decisões tomadas.
 
-O sistema fictício Fila Clara classifica tickets por prioridade. Ele usa JavaScript ESM e o test runner nativo do Node.js, sem dependências externas. O objetivo é praticar o uso do Kiro, não configurar infraestrutura.
+## Pré-requisitos
+
+- Kiro IDE ou Kiro CLI autenticado;
+- Git;
+- Node.js 20 ou superior;
+- conhecimento básico de terminal, código e testes.
