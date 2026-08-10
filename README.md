@@ -1,16 +1,19 @@
 # Prática do módulo 1 — diagnóstico e mudança controlada
 
-Esta branch contém um defeito intencional na classificação de tickets. O objetivo é praticar contexto explícito, diagnóstico antes da edição, revisão de diff e validação independente.
+## Objetivo
 
-## Resultado esperado
+Usar contexto explícito, separar diagnóstico de edição e corrigir somente uma condição defeituosa.
 
-- identificar a causa sem pedir uma alteração ampla;
-- corrigir somente a condição defeituosa;
-- manter os demais comportamentos;
-- comparar um prompt vago com um prompt verificável;
-- entregar testes e evidência.
+## Tempo previsto
 
-## 1. Crie sua branch
+| Etapa | Limite |
+|---|---:|
+| preparar e reproduzir | 3 min |
+| turno 1: diagnosticar | 7 min |
+| turno 2: corrigir | 10 min |
+| testar e revisar | 5 min |
+
+## 1. Prepare sua branch
 
 ```bash
 git switch modulo-01
@@ -18,34 +21,31 @@ git switch -c participante/seu-nome/modulo-01
 npm test
 ```
 
-Antes de abrir o Kiro, registre qual teste falha, comportamento esperado e arquivos que você prevê alterar.
+Resultado esperado: um teste de classificação falha.
 
-## 2. Diagnostique sem editar
+Use somente estes arquivos como contexto:
 
-Forneça somente `src/domain/tickets.js` e `test/tickets.test.js`.
+- `src/domain/tickets.js`;
+- `test/tickets.test.js`.
 
-```text
-Analise a falha sem editar arquivos. Retorne causa, condição responsável, menor correção,
-comportamentos que devem permanecer e comando de teste. Não proponha refatoração.
-```
-
-## 3. Corrija com escopo mínimo
+## Turno 1 — diagnosticar sem editar
 
 ```text
-Implemente somente a correção confirmada. Não renomeie, não altere contratos e não edite
-testes para obter verde. Execute npm test, mostre o diff e pare.
+Analise a falha sem editar arquivos. Retorne a causa, a condição responsável,
+a menor correção possível e o comportamento que deve continuar funcionando.
+Não proponha refatoração. Pare após o diagnóstico.
 ```
 
-## 4. Compare a qualidade dos prompts
+Confirme no código se o diagnóstico faz sentido antes de continuar.
 
-Escolha outro caso-limite da classificação e execute duas sessões novas:
+## Turno 2 — corrigir o mínimo
 
-- tentativa A: pedido vago de até duas linhas;
-- tentativa B: resultado, contexto, restrições e validação explícitos.
+```text
+Implemente somente a correção confirmada. Não renomeie, não altere contratos e
+não edite testes para obter verde. Execute npm test, mostre o diff e pare.
+```
 
-Compare arquivos tocados, retrabalho, aderência ao escopo e qualidade dos testes. Uma execução isolada não prova ganho geral de produtividade.
-
-## 5. Valide e entregue
+## Valide
 
 ```bash
 npm test
@@ -53,12 +53,8 @@ git diff --check
 git diff
 ```
 
-Crie `evidencias/modulo-01.md` com causa, prompts, mudança rejeitada, resultado dos testes e risco residual. Abra um pull request da sua branch.
+A prática termina quando os testes passam, o diff contém apenas a correção necessária e você consegue explicar a causa.
 
-## Critérios de aceite
+## Se o Kiro estiver lento
 
-- todos os testes passam;
-- somente a mudança necessária foi feita;
-- nenhum teste foi enfraquecido;
-- comparação dos prompts contém evidência observada;
-- não há segredo ou dado real no diff.
+Interrompa após três minutos sem progresso útil. Reabra uma sessão com somente os dois arquivos indicados e repita o prompt da etapa atual. Se ainda não responder, faça o diagnóstico em grupo e preserve o turno de correção.
