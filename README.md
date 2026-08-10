@@ -1,8 +1,21 @@
-# Prática do módulo 3 — automação que merece existir
+# Prática do módulo 3 — steering e skill
 
-Esta branch contém steering incompleto, uma skill de revisão, um scanner local e uma configuração MCP desabilitada. O objetivo é escolher e implementar somente o mecanismo adequado para uma rotina real.
+## Objetivo
 
-## 1. Crie sua branch
+Experimentar duas camadas de contexto persistente com apenas dois turnos: steering condicional para orientar o trabalho e skill para revisar o diff.
+
+Hooks, MCP e Powers são demonstrados ou apresentados no treinamento. A prática não depende de conexão externa.
+
+## Tempo previsto
+
+| Etapa | Limite |
+|---|---:|
+| ler os arquivos | 4 min |
+| turno 1: completar steering | 7 min |
+| turno 2: revisar com skill | 6 min |
+| guardrail e comparação | 5 min |
+
+## 1. Prepare sua branch
 
 ```bash
 git switch modulo-03
@@ -14,65 +27,37 @@ Leia:
 - `AGENTS.md`;
 - `.kiro/steering/domain-rules.md`;
 - `.kiro/skills/revisao-segura/SKILL.md`;
-- `.kiro/settings/mcp.example.json`;
-- `scripts/check-secrets.mjs`.
+- `src/domain/tickets.js`.
 
-## 2. Escolha uma rotina observável
+## Turno 1 — completar uma regra
 
-Defina antes de automatizar:
+```text
+Leia AGENTS.md, .kiro/steering/domain-rules.md e src/domain/tickets.js.
+Complete somente o TODO do steering com uma regra curta para validar prioridade antes
+de contar tickets. Preserve o frontmatter fileMatch, não altere código, mostre o diff e pare.
+```
 
-- frequência atual;
-- tempo ou erro que pretende reduzir;
-- entrada e saída;
-- permissões necessárias;
-- comportamento em falha;
-- responsável e momento de revisão.
+Confirme que a regra é específica do domínio e não duplica uma instrução universal do `AGENTS.md`.
 
-## 3. Escolha um mecanismo
+## Turno 2 — revisar sob demanda
 
-Implemente somente um:
+```text
+/revisao-segura Revise somente #git diff. Retorne no máximo cinco itens separados em
+problemas, verificações pendentes e risco residual. Não edite arquivos.
+```
 
-- steering condicional para regra ligada a arquivos;
-- skill para procedimento reutilizável;
-- hook shell para validação determinística;
-- MCP apenas se houver servidor aprovado e realmente necessário.
-
-Explique por que pelo menos dois mecanismos alternativos foram rejeitados.
-
-Se escolher MCP:
-
-- não use o endpoint fictício do exemplo;
-- comece desabilitado e sem autoaprovação;
-- use variável de ambiente para credencial;
-- desabilite ferramentas de escrita desnecessárias;
-- teste apenas com dados fictícios.
-
-## 4. Teste a automação
-
-Cubra:
-
-1. caminho normal;
-2. caso-limite;
-3. entrada inválida;
-4. indisponibilidade ou erro;
-5. tentativa fora do escopo.
-
-Validação mínima:
+## Valide
 
 ```bash
 node scripts/check-secrets.mjs .
 git diff --check
+git diff
 ```
 
-## 5. Entregue
+Abra `.kiro/settings/mcp.example.json` apenas para confirmar que o servidor está desabilitado, não há autoaprovação e as ferramentas de escrita estão bloqueadas. Não conecte o servidor.
 
-Crie `evidencias/modulo-03.md` com problema observado, mecanismo escolhido, alternativas rejeitadas, permissões, testes e risco residual. Abra um pull request com configuração, documentação e evidência.
+A prática termina quando você consegue explicar a diferença entre uma regra de steering, uma skill e um guardrail shell.
 
-## Critérios de aceite
+## Se o Kiro estiver lento
 
-- a automação resolve uma rotina observável;
-- contexto e permissões têm escopo mínimo;
-- falha é segura e documentada;
-- nenhum segredo é persistido;
-- testes cobrem os cinco cenários;
-- existe responsável por revisar ou remover a automação.
+Interrompa após três minutos sem progresso útil. Complete a regra em grupo e preserve o turno da skill. Hook e MCP não devem ser configurados para compensar o atraso.

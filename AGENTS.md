@@ -2,7 +2,7 @@
 
 ## Objetivo
 
-Este é um projeto didático para aprender Kiro. Preserve o escopo de cada exercício e produza evidências verificáveis.
+Este é um projeto didático para aprender Kiro. Preserve o escopo de cada exercício e mantenha as práticas curtas e reproduzíveis.
 
 ## Regras universais
 
