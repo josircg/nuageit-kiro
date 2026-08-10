@@ -1,10 +1,21 @@
-# Prática do módulo 4 — capstone de operação segura
+# Prática do módulo 4 — agente restrito e função determinística
 
-Esta branch contém uma função de resumo incompleta, testes focados e um exemplo de custom agent restrito. O objetivo é concluir uma entrega técnica controlada e verificável.
+## Objetivo
 
-## Capstone
+Revisar um custom agent com ferramentas limitadas, produzir um plano curto e implementar somente uma função.
 
-### 1. Crie sua branch e reproduza
+Subagents, headless, Kiro Web e governança empresarial são demonstrados ou apresentados no treinamento. Eles não são usados nesta prática.
+
+## Tempo previsto
+
+| Etapa | Limite |
+|---|---:|
+| preparar e revisar o agente | 5 min |
+| turno 1: plano curto | 6 min |
+| turno 2: implementar | 9 min |
+| testar e revisar | 5 min |
+
+## 1. Prepare sua branch
 
 ```bash
 git switch modulo-04
@@ -12,59 +23,39 @@ git switch -c participante/seu-nome/modulo-04
 node --test test/resumo-operacional.test.js
 ```
 
-Resultado esperado: a função `resumirPorPrioridade` ainda não foi implementada.
+Resultado esperado: o teste falha porque `resumirPorPrioridade` ainda não foi implementada.
 
-### 2. Revise o agente
+Revise `.kiro/agents/pratica-segura.json.example`. O agente deve negar rede, MCP, push, deploy e escrita fora de `src/` e `test/`.
 
-Leia `.kiro/agents/capstone.json.example` e adapte somente se a versão instalada exigir. O agente deve:
+## Turno 1 — plano limitado
 
-- trabalhar apenas neste repositório;
-- não carregar MCP;
-- negar rede, push e deploy;
-- restringir escrita a código, testes, Specs e evidências;
-- permitir apenas validadores locais documentados.
+```text
+Leia apenas src/domain/resumo-operacional.js e test/resumo-operacional.test.js.
+Produza um plano de no máximo quatro passos para implementar resumirPorPrioridade.
+Inclua invariantes e comando de teste. Não edite nada e pare após o plano.
+```
 
-### 3. Planeje antes de editar
+Rejeite plano que proponha endpoint, dependência, banco ou refatoração.
 
-Peça um plano curto para implementar `resumirPorPrioridade`. Rejeite endpoint, dependência, banco ou refatoração fora do escopo.
+## Turno 2 — implementação restrita
 
-Implemente a função garantindo:
+```text
+Implemente somente resumirPorPrioridade conforme os testes. A saída deve conter P1, P2
+e P3 nessa ordem, não modificar a entrada e rejeitar prioridade inválida.
+Não altere testes ou outros arquivos. Execute o teste focado, mostre o diff e pare.
+```
 
-- saída sempre contém P1, P2 e P3;
-- ordem determinística;
-- entrada não é modificada;
-- prioridade desconhecida é rejeitada.
-
-### 4. Expanda o relatório
-
-Depois que o teste focado estiver verde, acrescente tickets próximos do SLA e vencidos:
-
-- timestamps em UTC;
-- `now` injetado;
-- ticket encerrado excluído de próximo/vencido;
-- nenhuma dependência ou chamada externa;
-- testes de exemplo e uma propriedade útil.
-
-Subagent é opcional apenas para investigação independente. Não permita escrita concorrente nos mesmos arquivos.
-
-### 5. Valide
+## Valide
 
 ```bash
 node --test test/resumo-operacional.test.js
 npm test
 git diff --check
-git status --short
 git diff
 ```
 
-## Entrega
+A prática termina quando os testes passam, somente a função foi alterada e você consegue explicar por que as permissões negadas não eram necessárias.
 
-Abra um pull request com código, testes e `evidencias/modulo-04.md`. Inclua requisito → implementação → teste, permissões negadas, sugestão do agente rejeitada, risco residual e rollback.
+## Se o Kiro estiver lento
 
-## Critérios de aceite
-
-- suíte completa passa;
-- agente segue menor privilégio;
-- relatório é determinístico;
-- PR apresenta evidência, não apenas relato;
-- registro final liga cada conclusão a uma evidência verificável.
+Interrompa após três minutos sem progresso útil. Use o plano-base do instrutor e preserve o turno de implementação. Não adicione subagent ou troque de ferramenta durante uma edição em andamento.

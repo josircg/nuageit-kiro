@@ -1,0 +1,20 @@
+{
+  "name": "pratica-segura-fila-clara",
+  "description": "Planeja e implementa somente a função curta da prática da Fila Clara",
+  "prompt": "Mantenha escopo mínimo, peça aprovação antes de escrever e confirme o resultado com testes e diff.",
+  "tools": ["read", "write", "shell"],
+  "allowedTools": ["read"],
+  "toolsSettings": {
+    "write": {
+      "allowedPaths": ["./src/**", "./test/**"]
+    },
+    "shell": {
+      "allowedCommands": ["npm test", "git diff", "git diff --check", "git status --short"]
+    }
+  },
+  "resources": [
+    "file://src/**/*.js",
+    "file://test/**/*.js"
+  ],
+  "includeMcpJson": false
+}
