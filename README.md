@@ -1,8 +1,19 @@
-# Prática do módulo 2 — Spec completa com gates
+# Prática do módulo 2 — um requisito e uma função
 
-Esta branch contém um requisito de SLA, uma função incompleta e testes iniciais. O objetivo é concluir uma Feature Spec, implementar por tarefas pequenas e usar uma Bugfix Spec para uma regressão controlada.
+## Objetivo
 
-## 1. Crie sua branch e reproduza
+Experimentar o núcleo de Spec-driven development sem gerar uma feature completa: refinar um requisito e implementar apenas a função ligada a ele.
+
+## Tempo previsto
+
+| Etapa | Limite |
+|---|---:|
+| preparar e reproduzir | 3 min |
+| turno 1: refinar requisito | 7 min |
+| turno 2: implementar função | 10 min |
+| testar e revisar | 5 min |
+
+## 1. Prepare sua branch
 
 ```bash
 git switch modulo-02
@@ -10,63 +21,39 @@ git switch -c participante/seu-nome/modulo-02
 npm test
 ```
 
-Resultado esperado: os testes de SLA falham porque `calcularVencimento` ainda não foi implementada.
+Resultado esperado: o teste de SLA falha porque `calcularVencimento` ainda não foi implementada.
 
-## 2. Refine os requisitos
+## Turno 1 — refinar somente o requisito
 
-Use Feature Spec Requirements-First. Complete `.kiro/specs/sla-alerta/requirements.md` com:
+Use `.kiro/specs/sla-alerta/requirements.md` e `test/sla.test.js`:
 
-- P1 vence em 60 minutos, P2 em 240 e P3 em 1440;
-- timestamps em UTC;
-- prioridade inválida é rejeitada;
-- alerta ao atingir exatamente 80% do prazo;
-- ticket encerrado não gera alerta;
-- reclassificação recalcula o vencimento a partir da criação original;
-- nenhuma notificação externa nesta entrega.
+```text
+Refine somente o REQ-1 do SLA em no máximo oito linhas. Use EARS e torne explícitos:
+P1 = 60 min, P2 = 240 min, P3 = 1440 min, timestamp UTC e prioridade inválida.
+Não gere design, tarefas ou código. Preserve o restante e pare após mostrar o diff.
+```
 
-Revise os requisitos antes de aprovar o design. Use EARS e inclua casos-limite.
+## Turno 2 — implementar uma função
 
-## 3. Gere e revise design e tarefas
+Use o requisito refinado, `src/domain/sla.js` e `test/sla.test.js`:
 
-Antes de aprovar `design.md` e `tasks.md`:
+```text
+Implemente apenas calcularVencimento conforme o REQ-1 e os testes existentes.
+Não adicione dependências, não altere outras funções e não edite os testes para obter verde.
+Execute node --test test/sla.test.js, mostre o diff e pare.
+```
 
-- exija funções puras e relógio injetado;
-- mapeie requisito → função → teste;
-- rejeite dependência, banco ou integração externa;
-- separe tarefas obrigatórias e opcionais;
-- implemente uma tarefa por vez antes de usar execução paralela.
-
-## 4. Implemente e valide
-
-Comece por `calcularVencimento`. Não altere testes apenas para obter verde.
+## Valide
 
 ```bash
 node --test test/sla.test.js
 npm test
 git diff --check
-git diff -- .kiro/specs src test
+git diff -- .kiro/specs/sla-alerta/requirements.md src/domain/sla.js test/sla.test.js
 ```
 
-## 5. Exercite Bugfix Spec
+A prática termina com o requisito testável, uma função implementada e os testes passando. Design, tasks, alerta de 80% e Bugfix Spec são assuntos demonstrados no treinamento, não etapas deste exercício.
 
-Depois de implementar o alerta, introduza em uma branch temporária o defeito “ticket encerrado dispara alerta”. Registre:
+## Se o Kiro estiver lento
 
-- comportamento atual;
-- comportamento esperado;
-- comportamento que deve permanecer;
-- causa raiz;
-- teste que falha antes e passa depois.
-
-Corrija a regressão sem ampliar o escopo.
-
-## 6. Entregue
-
-Crie `evidencias/modulo-02.md` com os gates revisados, decisões rejeitadas, testes executados e risco residual. Abra um pull request contendo Specs, código, testes e evidência.
-
-## Critérios de aceite
-
-- requisitos, design e tarefas estão sincronizados;
-- cada requisito possui evidência ou teste;
-- suíte completa passa;
-- Feature Spec e Bugfix Spec têm escopos distintos;
-- não há integração externa, segredo ou dependência nova.
+Interrompa após três minutos sem progresso útil. Use o requisito-base fornecido pelo instrutor para preservar o turno de implementação. Não tente compensar o atraso gerando a Spec completa.
