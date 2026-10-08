@@ -1,7 +1,7 @@
 const PRIORIDADES = Object.freeze(['P1', 'P2', 'P3']);
 
 export function classificarPrioridade({ impacto, urgencia }) {
-  if (impacto === 'critico' || urgencia === 'alta') return 'P1';
+  if (impacto === 'critico' && urgencia === 'alta') return 'P1';
   if (impacto === 'critico' || urgencia === 'alta') return 'P2';
   return 'P3';
 }
